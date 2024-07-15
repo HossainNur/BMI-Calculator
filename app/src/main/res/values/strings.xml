@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">BMI Calculator</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="calculate">Calculate</string>
+    <string name="height">Enter Height</string>
+    <string name="weight">Enter weight</string>
+    <string name="score">Your Score is:</string>
+    <string name="you">You are</string>
+</resources>
