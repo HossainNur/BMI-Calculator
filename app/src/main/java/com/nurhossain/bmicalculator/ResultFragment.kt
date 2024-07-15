@@ -21,7 +21,26 @@ class ResultFragment : Fragment() {
         categoryTv = view.findViewById(R.id.category_tv)
         val score = arguments?.getDouble("bmi_score")
         bmiScoreTv.text = String.format("%.1f",score)
+
+        val category = when(String.format("%.1f",score).toDouble()){
+            in 0.0 .. 18.4 -> underweight
+            in 18.5 .. 24.9 -> normal
+            in 25.0 .. 29.9-> overweight
+            in 30.0 .. 34.9 -> obesity1
+            in 35.0 .. 39.9 -> obesity2
+            else -> obesity3
+        }
+        categoryTv.text = category
         return view
+    }
+
+    companion object{
+        val underweight = "UNDER WEIGHT"
+        val normal = "NORMAL"
+        val overweight = "OVER WEIGHT"
+        val obesity1 = "OBESITY CLASS 1"
+        val obesity2 = "OBESITY CLASS 2"
+        val obesity3 = "OBESITY CLASS 3"
     }
 
 }
