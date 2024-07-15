@@ -6,21 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.nurhossain.bmicalculator.databinding.FragmentResultBinding
 
 class ResultFragment : Fragment() {
 
-    private lateinit var bmiScoreTv: TextView
-    private lateinit var categoryTv: TextView
+    /*private lateinit var bmiScoreTv: TextView
+    private lateinit var categoryTv: TextView*/
+    private lateinit var binding: FragmentResultBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_result, container, false)
+        //val view = inflater.inflate(R.layout.fragment_result, container, false)
+        binding = FragmentResultBinding.inflate(inflater,container,false)
 
-        bmiScoreTv = view.findViewById(R.id.bmi_score_tv)
-        categoryTv = view.findViewById(R.id.category_tv)
+        /*bmiScoreTv = view.findViewById(R.id.bmi_score_tv)
+        categoryTv = view.findViewById(R.id.category_tv)*/
         val score = arguments?.getDouble("bmi_score")
-        bmiScoreTv.text = String.format("%.1f",score)
+        binding.bmiScoreTv.text = String.format("%.1f",score)
 
         val category = when(String.format("%.1f",score).toDouble()){
             in 0.0 .. 18.4 -> underweight
@@ -30,8 +33,8 @@ class ResultFragment : Fragment() {
             in 35.0 .. 39.9 -> obesity2
             else -> obesity3
         }
-        categoryTv.text = category
-        return view
+        binding.categoryTv.text = category
+        return binding.root
     }
 
     companion object{
