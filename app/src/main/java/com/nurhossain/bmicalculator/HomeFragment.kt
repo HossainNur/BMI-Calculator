@@ -9,8 +9,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.nurhossain.bmicalculator.databinding.FragmentHomeBinding
+import com.nurhossain.bmicalculator.viewmodels.BmiViewModel
 
 class HomeFragment : Fragment() {
 
@@ -18,6 +20,7 @@ class HomeFragment : Fragment() {
     private lateinit var heightEdit: EditText
     private lateinit var calculateBtn: Button*/
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var bmiViewModel: BmiViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,14 +32,17 @@ class HomeFragment : Fragment() {
         calculateBtn = view.findViewById(R.id.calculate_button)*/
 
         binding = FragmentHomeBinding.inflate(inflater,container,false)
+        bmiViewModel = ViewModelProvider(requireActivity()).get(BmiViewModel::class.java)
         binding.calculateButton.setOnClickListener {
             val weight = binding.editTextWeight.text.toString().toDouble()
             val height = binding.editTextHeight.text.toString().toDouble()
 
-            val bmi = weight / (height * height)
+            bmiViewModel.calculateBmi(weight,height)
+
+            //val bmi = weight / (height * height)
             //Toast.makeText(activity,bmi.toString(),Toast.LENGTH_LONG).show()
-            val bundle = bundleOf("bmi_score" to bmi)
-            findNavController().navigate(R.id.action_homeFragment_to_resultFragment,bundle)
+            //val bundle = bundleOf("bmi_score" to bmi)
+            findNavController().navigate(R.id.action_homeFragment_to_resultFragment)
         }
         return binding.root
     }
