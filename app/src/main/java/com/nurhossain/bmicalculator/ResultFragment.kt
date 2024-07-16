@@ -27,7 +27,13 @@ class ResultFragment : Fragment() {
         /*bmiScoreTv = view.findViewById(R.id.bmi_score_tv)
         categoryTv = view.findViewById(R.id.category_tv)*/
         //val score = arguments?.getDouble("bmi_score")
-        binding.bmiScoreTv.text = String.format("%.1f",bmiViewModel.bmi)
+
+        bmiViewModel.bmi.observe(viewLifecycleOwner){bmi ->
+            binding.bmiScoreTv.text = String.format("%.1f",bmi)
+        }
+        bmiViewModel.category.observe(viewLifecycleOwner){category ->
+            binding.categoryTv.text = category
+        }
 
         /*val category = when(String.format("%.1f",score).toDouble()){
             in 0.0 .. 18.4 -> underweight
@@ -37,7 +43,7 @@ class ResultFragment : Fragment() {
             in 35.0 .. 39.9 -> obesity2
             else -> obesity3
         }*/
-        binding.categoryTv.text = bmiViewModel.category
+
         return binding.root
     }
 

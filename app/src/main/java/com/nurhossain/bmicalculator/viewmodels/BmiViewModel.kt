@@ -1,14 +1,15 @@
 package com.nurhossain.bmicalculator.viewmodels
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class BmiViewModel: ViewModel() {
-    var bmi = 0.0
-    var category = ""
+    var bmi : MutableLiveData<Double> = MutableLiveData()
+    var category : MutableLiveData<String> = MutableLiveData()
     fun calculateBmi( weight: Double,height: Double){
-         bmi = weight / (height * height)
+         bmi.value = weight / (height * height)
 
-         category = when(String.format("%.1f",bmi).toDouble()){
+         category.value = when(String.format("%.1f",bmi.value).toDouble()){
             in 0.0 .. 18.4 -> underweight
             in 18.5 .. 24.9 -> normal
             in 25.0 .. 29.9-> overweight
